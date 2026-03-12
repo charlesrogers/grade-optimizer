@@ -168,6 +168,13 @@ export interface WorkloadRadar {
   highImpactCount: number;
 }
 
+// === Calendar View ===
+
+export interface CalendarAssignment extends WorkloadAssignment {
+  childName: string;   // "" for single-student mode
+  childIndex: number;  // index into color palette, -1 if single-student
+}
+
 // === Session Planner ===
 
 export interface SessionPlanItem extends TodoItem {
