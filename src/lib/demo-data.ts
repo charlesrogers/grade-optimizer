@@ -1291,3 +1291,26 @@ function buildEngagementJordan(): { studentId: string; studentName: string; cour
 export function generateEngagementDemoData(): { studentId: string; studentName: string; courses: Course[] }[] {
   return [buildEngagementSam(), buildEngagementAlex(), buildEngagementJordan()];
 }
+
+// === Demo Mode API Lookup Functions ===
+
+export function getDemoGradesForStudent(studentId: string): GradeOptimizerResponse {
+  const children = generateDemoChildren();
+  const child = children.find((c) => c.student.id === studentId) || children[0];
+  return {
+    ...child.data,
+    students: children.map((c) => c.student),
+    selectedStudent: child.student,
+  };
+}
+
+export function getDemoHistoryForStudent(studentId: string): AcademicHistoryResponse {
+  const all = buildDemoHistoryData();
+  return all.find((h) => h.studentId === studentId) || all[0];
+}
+
+export function getDemoRawCoursesForStudent(studentId: string): Course[] {
+  const all = generateEngagementDemoData();
+  const student = all.find((s) => s.studentId === studentId) || all[0];
+  return student.courses;
+}

@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { isDemoMode, enableDemoMode, disableDemoMode } from "@/lib/demo-mode";
 
 export function Nav() {
   const pathname = usePathname();
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
   const [isParent, setIsParent] = useState(false);
+  const [demo, setDemo] = useState(false);
 
   useEffect(() => {
+    setDemo(isDemoMode());
     try {
       const stored = sessionStorage.getItem("observees");
       if (stored) {
@@ -40,14 +43,26 @@ export function Nav() {
         { href: "/workload", label: "Coming Up" },
         { href: "/optimizer", label: "All Assignments" },
         { href: "/tonight", label: "Study Plan" },
-        { href: "/family/demo", label: "Parent View" },
       ];
 
   async function handleLogout() {
     setLoggingOut(true);
+    disableDemoMode();
     sessionStorage.removeItem("observees");
     await fetch("/api/canvas/logout", { method: "POST" });
     router.push("/");
+  }
+
+  function handleDemoToggle() {
+    if (demo) {
+      disableDemoMode();
+      router.push("/");
+      router.refresh();
+    } else {
+      enableDemoMode();
+      router.push("/family");
+      router.refresh();
+    }
   }
 
   return (
@@ -77,6 +92,16 @@ export function Nav() {
           ))}
         </div>
         <div className="ml-auto flex items-center gap-3">
+          <button
+            onClick={handleDemoToggle}
+            className={`text-[12px] font-medium px-2.5 py-1 rounded-full transition-colors ${
+              demo
+                ? "bg-amber-100 text-amber-800 hover:bg-amber-200"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+            }`}
+          >
+            {demo ? "Demo On" : "Demo"}
+          </button>
           <button
             onClick={handleLogout}
             disabled={loggingOut}

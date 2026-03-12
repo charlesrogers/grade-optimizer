@@ -13,9 +13,20 @@ import {
 import { generateForecasts } from "@/lib/forecast";
 import { generateWorkloadRadar } from "@/lib/workload";
 import { GradeOptimizerResponse, AssignmentSnapshot } from "@/lib/types";
+import { getDemoGradesForStudent, getDemoRawCoursesForStudent } from "@/lib/demo-data";
 
 export async function GET(request: NextRequest) {
   try {
+    const searchParams = request.nextUrl.searchParams;
+
+    const isDemo = searchParams.get("demo") === "true";
+    if (isDemo) {
+      const studentId = searchParams.get("studentId") || "demo-sam";
+      const response = getDemoGradesForStudent(studentId);
+      const rawCourses = getDemoRawCoursesForStudent(studentId);
+      return NextResponse.json({ ...response, rawCourses });
+    }
+
     const lmsConfig = await getLMSConfig();
     if (!lmsConfig) {
       return NextResponse.json(
@@ -23,8 +34,6 @@ export async function GET(request: NextRequest) {
         { status: 401 }
       );
     }
-
-    const searchParams = request.nextUrl.searchParams;
     const observedUserId = searchParams.get("studentId") || undefined;
 
     console.log(`Fetching courses from ${lmsConfig.type}...`);

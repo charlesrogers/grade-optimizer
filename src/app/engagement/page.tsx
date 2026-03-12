@@ -5,6 +5,7 @@ import type { Course, Student } from "@/lib/types";
 import { analyzeEngagement } from "@/lib/engagement-engine";
 import { EngagementDashboard } from "@/components/engagement-dashboard";
 import Link from "next/link";
+import { isDemoMode } from "@/lib/demo-mode";
 
 interface GradesResponse {
   students: Student[];
@@ -22,7 +23,8 @@ export default function EngagementPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch("/api/canvas/grades");
+        const demoQ = isDemoMode() ? "?demo=true" : "";
+        const res = await fetch(`/api/canvas/grades${demoQ}`);
         if (!res.ok) {
           setError("not_connected");
           setLoading(false);
@@ -70,12 +72,6 @@ export default function EngagementPage() {
             className="text-[13px] font-medium text-primary hover:underline"
           >
             Connect Canvas
-          </Link>
-          <Link
-            href="/engagement/demo"
-            className="text-[13px] font-medium text-primary hover:underline"
-          >
-            Try Demo
           </Link>
         </div>
       </div>
