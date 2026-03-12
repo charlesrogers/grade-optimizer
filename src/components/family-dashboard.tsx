@@ -44,24 +44,24 @@ function gradeColor(grade: number): string {
 function healthLevelColors(level: "green" | "yellow" | "red") {
   if (level === "green")
     return {
-      bg: "bg-emerald-50 dark:bg-emerald-950",
+      bg: "bg-emerald-50 dark:bg-emerald-500/10",
       ring: "ring-emerald-600/10",
-      text: "text-emerald-700 dark:text-emerald-300",
+      text: "text-emerald-700 dark:text-emerald-400",
       fill: "bg-emerald-500",
       label: "On track",
     };
   if (level === "yellow")
     return {
-      bg: "bg-amber-50 dark:bg-amber-950",
+      bg: "bg-amber-50 dark:bg-amber-500/10",
       ring: "ring-amber-600/10",
-      text: "text-amber-700 dark:text-amber-300",
+      text: "text-amber-700 dark:text-amber-400",
       fill: "bg-amber-500",
       label: "Needs attention",
     };
   return {
-    bg: "bg-red-50 dark:bg-red-950",
+    bg: "bg-red-50 dark:bg-red-500/10",
     ring: "ring-red-600/10",
-    text: "text-red-700 dark:text-red-300",
+    text: "text-red-700 dark:text-red-400",
     fill: "bg-red-500",
     label: "At risk",
   };
@@ -102,28 +102,28 @@ function findWeakCategories(
 }
 
 const priorityColors: Record<string, string> = {
-  critical: "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-red-600/10",
-  high: "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-amber-600/10",
-  medium: "bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 ring-blue-600/10",
-  low: "bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 ring-slate-600/10",
+  critical: "bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 ring-red-600/10",
+  high: "bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 ring-amber-600/10",
+  medium: "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 ring-blue-600/10",
+  low: "bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 ring-slate-600/10",
 };
 
 const alertSeverityColors: Record<string, string> = {
-  critical: "border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950",
-  warning: "border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950",
-  info: "border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950",
+  critical: "border-red-200 dark:border-red-500/20 bg-red-50 dark:bg-red-500/10",
+  warning: "border-amber-200 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/10",
+  info: "border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10",
 };
 
 const alertSeverityText: Record<string, string> = {
-  critical: "text-red-900 dark:text-red-100",
-  warning: "text-amber-900 dark:text-amber-100",
-  info: "text-blue-900 dark:text-blue-100",
+  critical: "text-red-900 dark:text-red-200",
+  warning: "text-amber-900 dark:text-amber-200",
+  info: "text-blue-900 dark:text-blue-200",
 };
 
 const alertSeverityDetail: Record<string, string> = {
-  critical: "text-red-800 dark:text-red-200",
-  warning: "text-amber-800 dark:text-amber-200",
-  info: "text-blue-800 dark:text-blue-200",
+  critical: "text-red-800 dark:text-red-300",
+  warning: "text-amber-800 dark:text-amber-300",
+  info: "text-blue-800 dark:text-blue-300",
 };
 
 const alertSeverityDot: Record<string, string> = {
@@ -141,8 +141,8 @@ function DeltaBadge({ value, suffix = "" }: { value: number; suffix?: string }) 
     <span
       className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold tabular-nums ${
         positive
-          ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 ring-1 ring-inset ring-emerald-600/20"
-          : "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-1 ring-inset ring-red-600/20"
+          ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-1 ring-inset ring-emerald-600/20"
+          : "bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 ring-1 ring-inset ring-red-600/20"
       }`}
     >
       {positive ? "+" : ""}
@@ -641,7 +641,7 @@ function ChildCard({
                       +{todo.gradeDelta.toFixed(1)}%
                     </span>
                     {todo.thresholdCrossing && (
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 ring-1 ring-inset ring-emerald-600/20 flex-shrink-0">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-1 ring-inset ring-emerald-600/20 flex-shrink-0">
                         {todo.thresholdCrossing}
                       </span>
                     )}
@@ -661,13 +661,13 @@ function ChildCard({
                 {weakCategories.map((wc, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-900 text-[12px]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/15 text-[12px]"
                   >
-                    <span className="font-medium text-red-800 dark:text-red-200">
+                    <span className="font-medium text-red-800 dark:text-red-300">
                       {wc.category}
                     </span>
                     <span className="text-red-600/70 dark:text-red-400/70">{wc.course}</span>
-                    <span className="font-semibold text-red-700 dark:text-red-300 tabular-nums">
+                    <span className="font-semibold text-red-700 dark:text-red-400 tabular-nums">
                       {wc.avg.toFixed(0)}%
                     </span>
                   </span>
@@ -686,7 +686,7 @@ function ChildCard({
                 {riskyCourses.map((course) => (
                   <span
                     key={course}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950 border border-amber-100 dark:border-amber-900 text-[12px] font-medium text-amber-800 dark:text-amber-200"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/15 text-[12px] font-medium text-amber-800 dark:text-amber-300"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                     {course}
@@ -746,7 +746,7 @@ function ChildCard({
                         </div>
                       </div>
                       {course.missingCount > 0 && (
-                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-1 ring-inset ring-red-600/10 flex-shrink-0">
+                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 ring-1 ring-inset ring-red-600/10 flex-shrink-0">
                           {course.missingCount} missing
                         </span>
                       )}
@@ -807,7 +807,7 @@ function GreenChildRow({
       <p className="text-[14px] font-medium text-foreground flex-1">
         {child.student.name}
       </p>
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ring-1 ring-inset bg-emerald-50 dark:bg-emerald-950 ring-emerald-600/10 text-emerald-700 dark:text-emerald-300">
+      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ring-1 ring-inset bg-emerald-50 dark:bg-emerald-500/10 ring-emerald-600/10 text-emerald-700 dark:text-emerald-400">
         All good
       </span>
       <span className="text-[14px] font-semibold tabular-nums text-emerald-600">

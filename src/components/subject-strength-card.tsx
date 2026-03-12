@@ -5,9 +5,9 @@ import { Sparkline } from "@/components/sparkline";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 const strengthColors = {
-  strong: { border: "border-emerald-200 dark:border-emerald-800", bg: "bg-emerald-50 dark:bg-emerald-950", text: "text-emerald-700 dark:text-emerald-300", badge: "bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200" },
-  average: { border: "border-gray-200 dark:border-gray-800", bg: "bg-gray-50 dark:bg-gray-950", text: "text-gray-600 dark:text-gray-400", badge: "bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300" },
-  weak: { border: "border-red-200 dark:border-red-800", bg: "bg-red-50 dark:bg-red-950", text: "text-red-700 dark:text-red-300", badge: "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200" },
+  strong: { border: "border-emerald-200 dark:border-emerald-500/20", bg: "bg-emerald-50 dark:bg-emerald-500/10", text: "text-emerald-700 dark:text-emerald-400", badge: "bg-emerald-100 dark:bg-emerald-500/15 text-emerald-800 dark:text-emerald-300" },
+  average: { border: "border-gray-200 dark:border-gray-500/20", bg: "bg-gray-50 dark:bg-gray-500/10", text: "text-gray-600 dark:text-gray-400", badge: "bg-gray-100 dark:bg-gray-500/15 text-gray-700 dark:text-gray-300" },
+  weak: { border: "border-red-200 dark:border-red-500/20", bg: "bg-red-50 dark:bg-red-500/10", text: "text-red-700 dark:text-red-400", badge: "bg-red-100 dark:bg-red-500/15 text-red-800 dark:text-red-300" },
 };
 
 const sparklineColors = {

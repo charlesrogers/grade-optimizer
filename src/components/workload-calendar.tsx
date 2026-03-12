@@ -5,11 +5,11 @@ import { CalendarAssignment } from "@/lib/types";
 import { GradeImpactBar } from "@/components/grade-impact-bar";
 
 const CHILD_COLORS = [
-  { bg: "bg-violet-50 dark:bg-violet-950", border: "border-violet-200 dark:border-violet-800", dot: "bg-violet-500", text: "text-violet-700 dark:text-violet-300" },
-  { bg: "bg-sky-50 dark:bg-sky-950", border: "border-sky-200 dark:border-sky-800", dot: "bg-sky-500", text: "text-sky-700 dark:text-sky-300" },
-  { bg: "bg-amber-50 dark:bg-amber-950", border: "border-amber-200 dark:border-amber-800", dot: "bg-amber-500", text: "text-amber-700 dark:text-amber-300" },
-  { bg: "bg-emerald-50 dark:bg-emerald-950", border: "border-emerald-200 dark:border-emerald-800", dot: "bg-emerald-500", text: "text-emerald-700 dark:text-emerald-300" },
-  { bg: "bg-rose-50 dark:bg-rose-950", border: "border-rose-200 dark:border-rose-800", dot: "bg-rose-500", text: "text-rose-700 dark:text-rose-300" },
+  { bg: "bg-violet-50 dark:bg-violet-500/10", border: "border-violet-200 dark:border-violet-500/20", dot: "bg-violet-500", text: "text-violet-700 dark:text-violet-400" },
+  { bg: "bg-sky-50 dark:bg-sky-500/10", border: "border-sky-200 dark:border-sky-500/20", dot: "bg-sky-500", text: "text-sky-700 dark:text-sky-400" },
+  { bg: "bg-amber-50 dark:bg-amber-500/10", border: "border-amber-200 dark:border-amber-500/20", dot: "bg-amber-500", text: "text-amber-700 dark:text-amber-400" },
+  { bg: "bg-emerald-50 dark:bg-emerald-500/10", border: "border-emerald-200 dark:border-emerald-500/20", dot: "bg-emerald-500", text: "text-emerald-700 dark:text-emerald-400" },
+  { bg: "bg-rose-50 dark:bg-rose-500/10", border: "border-rose-200 dark:border-rose-500/20", dot: "bg-rose-500", text: "text-rose-700 dark:text-rose-400" },
 ];
 
 function formatEffort(minutes: number): string {
@@ -62,7 +62,7 @@ function AssignmentCard({
     <div
       className={`px-3 py-2.5 rounded-lg border transition-colors ${
         assignment.isHighImpact
-          ? "border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/50"
+          ? "border-amber-200 dark:border-amber-500/20 bg-amber-50/50 dark:bg-amber-500/8"
           : color
             ? `${color.border} ${color.bg}`
             : "bg-card"
@@ -97,7 +97,7 @@ function AssignmentCard({
           </p>
         </div>
         {assignment.isHighImpact && (
-          <span className="inline-flex items-center px-1 py-0.5 rounded text-[9px] font-semibold bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 flex-shrink-0">
+          <span className="inline-flex items-center px-1 py-0.5 rounded text-[9px] font-semibold bg-amber-100 dark:bg-amber-500/15 text-amber-800 dark:text-amber-300 flex-shrink-0">
             HIGH
           </span>
         )}

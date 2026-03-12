@@ -1,21 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { useTheme } from "next-themes";
 import type { DayOfWeekCell } from "@/lib/types";
 
 const DAY_LABELS = ["M", "T", "W", "T", "F", "S", "S"];
 const DAY_INDEX = [1, 2, 3, 4, 5, 6, 0]; // Mon-Sun mapped to JS day indices
 
-const LEVEL_COLORS: Record<string, string> = {
-  green: "#10b981",
-  yellow: "#f59e0b",
-  red: "#ef4444",
-  gray: "#f3f4f6",
-};
-
 export function DayHeatmap({ data }: { data: DayOfWeekCell[] }) {
   const [hovered, setHovered] = useState<DayOfWeekCell | null>(null);
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const { resolvedTheme } = useTheme();
+
+  const LEVEL_COLORS: Record<string, string> = {
+    green: "#10b981",
+    yellow: "#f59e0b",
+    red: "#ef4444",
+    gray: resolvedTheme === "dark" ? "#1e293b" : "#f3f4f6",
+  };
 
   // Get unique weeks in order (most recent first for display)
   const weeks = Array.from(new Set(data.map((d) => d.weekStart))).sort().reverse();

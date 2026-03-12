@@ -87,7 +87,7 @@ function ForecastRow({ forecast }: { forecast: CourseForecast }) {
         </div>
 
         {forecast.riskCategory && forecast.riskCategory.riskScore > 0.05 && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-medium bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-1 ring-inset ring-amber-600/20 flex-shrink-0">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-medium bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 ring-1 ring-inset ring-amber-600/20 flex-shrink-0">
             <span className="h-1 w-1 rounded-full bg-amber-500" />
             {forecast.riskCategory.groupName}
           </span>
