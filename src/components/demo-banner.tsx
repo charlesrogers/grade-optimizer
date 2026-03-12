@@ -22,17 +22,17 @@ export function DemoBanner() {
   }
 
   return (
-    <div className="bg-amber-50 border-b border-amber-200">
+    <div className="bg-amber-50 dark:bg-amber-950 border-b border-amber-200 dark:border-amber-800">
       <div className="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-          <p className="text-[12px] font-medium text-amber-800">
+          <p className="text-[12px] font-medium text-amber-800 dark:text-amber-200">
             Demo mode — showing sample data
           </p>
         </div>
         <button
           onClick={handleExit}
-          className="text-[12px] font-medium text-amber-800 hover:text-amber-900 underline underline-offset-2"
+          className="text-[12px] font-medium text-amber-800 dark:text-amber-200 hover:text-amber-900 dark:hover:text-amber-100 underline underline-offset-2"
         >
           Exit Demo
         </button>

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 import { isDemoMode, enableDemoMode, disableDemoMode } from "@/lib/demo-mode";
 
 export function Nav() {
@@ -11,6 +13,12 @@ export function Nav() {
   const [loggingOut, setLoggingOut] = useState(false);
   const [isParent, setIsParent] = useState(false);
   const [demo, setDemo] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setDemo(isDemoMode());
@@ -66,7 +74,7 @@ export function Nav() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-lg">
+    <nav className="sticky top-0 z-50 border-b bg-white/80 dark:bg-neutral-900/80 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-6 flex items-center h-14">
         <Link href={isParent ? "/family" : "/dashboard"} className="flex items-center gap-2 mr-8">
           <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center">
@@ -103,16 +111,25 @@ export function Nav() {
             </span>
             <span
               className={`relative inline-flex h-[22px] w-[40px] shrink-0 items-center rounded-full transition-colors duration-200 ${
-                demo ? "bg-amber-400" : "bg-gray-200"
+                demo ? "bg-amber-400" : "bg-gray-200 dark:bg-neutral-700"
               }`}
             >
               <span
-                className={`inline-block h-[18px] w-[18px] rounded-full bg-white shadow-sm transition-transform duration-200 ${
+                className={`inline-block h-[18px] w-[18px] rounded-full bg-white dark:bg-neutral-200 shadow-sm transition-transform duration-200 ${
                   demo ? "translate-x-[20px]" : "translate-x-[2px]"
                 }`}
               />
             </span>
           </button>
+          {mounted && (
+            <button
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              className="h-8 w-8 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              aria-label="Toggle theme"
+            >
+              {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+          )}
           <button
             onClick={handleLogout}
             disabled={loggingOut}

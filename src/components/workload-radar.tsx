@@ -26,7 +26,7 @@ function AssignmentRow({ assignment }: { assignment: WorkloadAssignment }) {
     <div
       className={`px-4 py-3 rounded-lg border transition-colors ${
         assignment.isHighImpact
-          ? "border-amber-200 bg-amber-50/50"
+          ? "border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/50"
           : "bg-card"
       }`}
     >
@@ -52,7 +52,7 @@ function AssignmentRow({ assignment }: { assignment: WorkloadAssignment }) {
           </p>
         </div>
         {assignment.isHighImpact && (
-          <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 flex-shrink-0">
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 flex-shrink-0">
             HIGH
           </span>
         )}

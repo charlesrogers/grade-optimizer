@@ -44,24 +44,24 @@ function gradeColor(grade: number): string {
 function healthLevelColors(level: "green" | "yellow" | "red") {
   if (level === "green")
     return {
-      bg: "bg-emerald-50",
+      bg: "bg-emerald-50 dark:bg-emerald-950",
       ring: "ring-emerald-600/10",
-      text: "text-emerald-700",
+      text: "text-emerald-700 dark:text-emerald-300",
       fill: "bg-emerald-500",
       label: "On track",
     };
   if (level === "yellow")
     return {
-      bg: "bg-amber-50",
+      bg: "bg-amber-50 dark:bg-amber-950",
       ring: "ring-amber-600/10",
-      text: "text-amber-700",
+      text: "text-amber-700 dark:text-amber-300",
       fill: "bg-amber-500",
       label: "Needs attention",
     };
   return {
-    bg: "bg-red-50",
+    bg: "bg-red-50 dark:bg-red-950",
     ring: "ring-red-600/10",
-    text: "text-red-700",
+    text: "text-red-700 dark:text-red-300",
     fill: "bg-red-500",
     label: "At risk",
   };
@@ -102,28 +102,28 @@ function findWeakCategories(
 }
 
 const priorityColors: Record<string, string> = {
-  critical: "bg-red-50 text-red-700 ring-red-600/10",
-  high: "bg-amber-50 text-amber-700 ring-amber-600/10",
-  medium: "bg-blue-50 text-blue-700 ring-blue-600/10",
-  low: "bg-slate-50 text-slate-600 ring-slate-600/10",
+  critical: "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-red-600/10",
+  high: "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-amber-600/10",
+  medium: "bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 ring-blue-600/10",
+  low: "bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 ring-slate-600/10",
 };
 
 const alertSeverityColors: Record<string, string> = {
-  critical: "border-red-200 bg-red-50",
-  warning: "border-amber-200 bg-amber-50",
-  info: "border-blue-200 bg-blue-50",
+  critical: "border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950",
+  warning: "border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950",
+  info: "border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950",
 };
 
 const alertSeverityText: Record<string, string> = {
-  critical: "text-red-900",
-  warning: "text-amber-900",
-  info: "text-blue-900",
+  critical: "text-red-900 dark:text-red-100",
+  warning: "text-amber-900 dark:text-amber-100",
+  info: "text-blue-900 dark:text-blue-100",
 };
 
 const alertSeverityDetail: Record<string, string> = {
-  critical: "text-red-800",
-  warning: "text-amber-800",
-  info: "text-blue-800",
+  critical: "text-red-800 dark:text-red-200",
+  warning: "text-amber-800 dark:text-amber-200",
+  info: "text-blue-800 dark:text-blue-200",
 };
 
 const alertSeverityDot: Record<string, string> = {
@@ -141,8 +141,8 @@ function DeltaBadge({ value, suffix = "" }: { value: number; suffix?: string }) 
     <span
       className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold tabular-nums ${
         positive
-          ? "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20"
-          : "bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20"
+          ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 ring-1 ring-inset ring-emerald-600/20"
+          : "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-1 ring-inset ring-red-600/20"
       }`}
     >
       {positive ? "+" : ""}
@@ -203,7 +203,7 @@ function AlertFeed({ alerts }: { alerts: PredictiveAlert[] }) {
           key={alert.id}
           className={`flex items-start gap-3 px-4 py-3 rounded-xl border ${alertSeverityColors[alert.severity]}`}
         >
-          <span className="h-5 w-5 rounded-full bg-white/60 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <span className="h-5 w-5 rounded-full bg-white/60 dark:bg-neutral-900/60 flex items-center justify-center flex-shrink-0 mt-0.5">
             <span
               className={`h-2 w-2 rounded-full ${alertSeverityDot[alert.severity]}`}
             />
@@ -241,7 +241,7 @@ function FamilyAssignmentDrillDown({ changes }: { changes: AssignmentChange[] })
     <div className="space-y-2 pt-1">
       {graded.length > 0 && (
         <div>
-          <p className="text-[10px] font-medium text-emerald-700 uppercase tracking-wider mb-1">Newly graded</p>
+          <p className="text-[10px] font-medium text-emerald-700 dark:text-emerald-300 uppercase tracking-wider mb-1">Newly graded</p>
           {graded.map((a) => (
             <div key={a.assignmentId} className="flex items-center gap-2 text-[11px] py-0.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
@@ -254,7 +254,7 @@ function FamilyAssignmentDrillDown({ changes }: { changes: AssignmentChange[] })
       )}
       {scoreChanged.length > 0 && (
         <div>
-          <p className="text-[10px] font-medium text-blue-700 uppercase tracking-wider mb-1">Scores changed</p>
+          <p className="text-[10px] font-medium text-blue-700 dark:text-blue-300 uppercase tracking-wider mb-1">Scores changed</p>
           {scoreChanged.map((a) => (
             <div key={a.assignmentId} className="flex items-center gap-2 text-[11px] py-0.5">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-500 flex-shrink-0" />
@@ -273,7 +273,7 @@ function FamilyAssignmentDrillDown({ changes }: { changes: AssignmentChange[] })
       )}
       {newlyMissing.length > 0 && (
         <div>
-          <p className="text-[10px] font-medium text-red-700 uppercase tracking-wider mb-1">Newly missing</p>
+          <p className="text-[10px] font-medium text-red-700 dark:text-red-300 uppercase tracking-wider mb-1">Newly missing</p>
           {newlyMissing.map((a) => (
             <div key={a.assignmentId} className="flex items-center gap-2 text-[11px] py-0.5">
               <span className="h-1.5 w-1.5 rounded-full bg-red-500 flex-shrink-0" />
@@ -285,7 +285,7 @@ function FamilyAssignmentDrillDown({ changes }: { changes: AssignmentChange[] })
       )}
       {noLongerMissing.length > 0 && (
         <div>
-          <p className="text-[10px] font-medium text-emerald-700 uppercase tracking-wider mb-1">No longer missing</p>
+          <p className="text-[10px] font-medium text-emerald-700 dark:text-emerald-300 uppercase tracking-wider mb-1">No longer missing</p>
           {noLongerMissing.map((a) => (
             <div key={a.assignmentId} className="flex items-center gap-2 text-[11px] py-0.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
@@ -641,7 +641,7 @@ function ChildCard({
                       +{todo.gradeDelta.toFixed(1)}%
                     </span>
                     {todo.thresholdCrossing && (
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20 flex-shrink-0">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 ring-1 ring-inset ring-emerald-600/20 flex-shrink-0">
                         {todo.thresholdCrossing}
                       </span>
                     )}
@@ -661,13 +661,13 @@ function ChildCard({
                 {weakCategories.map((wc, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-red-50 border border-red-100 text-[12px]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-900 text-[12px]"
                   >
-                    <span className="font-medium text-red-800">
+                    <span className="font-medium text-red-800 dark:text-red-200">
                       {wc.category}
                     </span>
-                    <span className="text-red-600/70">{wc.course}</span>
-                    <span className="font-semibold text-red-700 tabular-nums">
+                    <span className="text-red-600/70 dark:text-red-400/70">{wc.course}</span>
+                    <span className="font-semibold text-red-700 dark:text-red-300 tabular-nums">
                       {wc.avg.toFixed(0)}%
                     </span>
                   </span>
@@ -686,7 +686,7 @@ function ChildCard({
                 {riskyCourses.map((course) => (
                   <span
                     key={course}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-100 text-[12px] font-medium text-amber-800"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950 border border-amber-100 dark:border-amber-900 text-[12px] font-medium text-amber-800 dark:text-amber-200"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                     {course}
@@ -746,7 +746,7 @@ function ChildCard({
                         </div>
                       </div>
                       {course.missingCount > 0 && (
-                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/10 flex-shrink-0">
+                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-1 ring-inset ring-red-600/10 flex-shrink-0">
                           {course.missingCount} missing
                         </span>
                       )}
@@ -807,7 +807,7 @@ function GreenChildRow({
       <p className="text-[14px] font-medium text-foreground flex-1">
         {child.student.name}
       </p>
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ring-1 ring-inset bg-emerald-50 ring-emerald-600/10 text-emerald-700">
+      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ring-1 ring-inset bg-emerald-50 dark:bg-emerald-950 ring-emerald-600/10 text-emerald-700 dark:text-emerald-300">
         All good
       </span>
       <span className="text-[14px] font-semibold tabular-nums text-emerald-600">

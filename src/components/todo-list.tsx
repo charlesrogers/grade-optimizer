@@ -20,26 +20,26 @@ const priorityConfig: Record<
   critical: {
     label: "Critical",
     dot: "bg-red-500",
-    bg: "bg-red-50",
-    text: "text-red-700",
+    bg: "bg-red-50 dark:bg-red-950",
+    text: "text-red-700 dark:text-red-300",
   },
   high: {
     label: "High",
     dot: "bg-amber-500",
-    bg: "bg-amber-50",
-    text: "text-amber-700",
+    bg: "bg-amber-50 dark:bg-amber-950",
+    text: "text-amber-700 dark:text-amber-300",
   },
   medium: {
     label: "Medium",
     dot: "bg-blue-500",
-    bg: "bg-blue-50",
-    text: "text-blue-700",
+    bg: "bg-blue-50 dark:bg-blue-950",
+    text: "text-blue-700 dark:text-blue-300",
   },
   low: {
     label: "Low",
     dot: "bg-slate-400",
-    bg: "bg-slate-50",
-    text: "text-slate-600",
+    bg: "bg-slate-50 dark:bg-slate-950",
+    text: "text-slate-600 dark:text-slate-400",
   },
 };
 

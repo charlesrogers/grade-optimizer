@@ -22,14 +22,14 @@ function gradeBg(grade: number): string {
 function letterBadge(letter: string, grade: number) {
   const bg =
     grade >= 90
-      ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+      ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 ring-emerald-600/20"
       : grade >= 80
-        ? "bg-blue-50 text-blue-700 ring-blue-600/20"
+        ? "bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 ring-blue-600/20"
         : grade >= 70
-          ? "bg-amber-50 text-amber-700 ring-amber-600/20"
+          ? "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 ring-amber-600/20"
           : grade >= 60
-            ? "bg-orange-50 text-orange-700 ring-orange-600/20"
-            : "bg-red-50 text-red-700 ring-red-600/20";
+            ? "bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 ring-orange-600/20"
+            : "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 ring-red-600/20";
 
   return (
     <span
@@ -96,7 +96,7 @@ export function CourseCard({
               )}
             </p>
             {forecast.riskCategory && forecast.riskCategory.riskScore > 0.1 && (
-              <p className="text-[11px] text-amber-700 mt-0.5">
+              <p className="text-[11px] text-amber-700 dark:text-amber-300 mt-0.5">
                 Watch {forecast.riskCategory.groupName} — {forecast.riskCategory.remainingCount} assignment{forecast.riskCategory.remainingCount > 1 ? "s" : ""} left, big weight
               </p>
             )}
@@ -105,9 +105,9 @@ export function CourseCard({
 
         {/* Missing alert */}
         {breakdown.missingCount > 0 && (
-          <div className="flex items-center gap-1.5 mt-2.5 px-2.5 py-1.5 rounded-lg bg-red-50 border border-red-100">
+          <div className="flex items-center gap-1.5 mt-2.5 px-2.5 py-1.5 rounded-lg bg-red-50 dark:bg-red-950 border border-red-100 dark:border-red-900">
             <span className="h-1.5 w-1.5 rounded-full bg-red-500 flex-shrink-0" />
-            <span className="text-[12px] font-medium text-red-700">
+            <span className="text-[12px] font-medium text-red-700 dark:text-red-300">
               {breakdown.missingCount} missing — {breakdown.missingCount === 1 ? "that's a" : "those are"} zero{breakdown.missingCount > 1 ? "s" : ""} in the gradebook
             </span>
             {breakdown.potentialGain > 0 && (

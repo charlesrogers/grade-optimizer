@@ -7,25 +7,25 @@ import { PeriodComparisonCards } from "@/components/period-comparison";
 
 const SEVERITY_STYLES = {
   critical: {
-    bg: "bg-red-50",
-    border: "border-red-200",
+    bg: "bg-red-50 dark:bg-red-950",
+    border: "border-red-200 dark:border-red-800",
     dot: "bg-red-500",
-    text: "text-red-800",
-    subtext: "text-red-700",
+    text: "text-red-800 dark:text-red-200",
+    subtext: "text-red-700 dark:text-red-300",
   },
   warning: {
-    bg: "bg-amber-50",
-    border: "border-amber-200",
+    bg: "bg-amber-50 dark:bg-amber-950",
+    border: "border-amber-200 dark:border-amber-800",
     dot: "bg-amber-500",
-    text: "text-amber-800",
-    subtext: "text-amber-700",
+    text: "text-amber-800 dark:text-amber-200",
+    subtext: "text-amber-700 dark:text-amber-300",
   },
   info: {
-    bg: "bg-blue-50",
-    border: "border-blue-200",
+    bg: "bg-blue-50 dark:bg-blue-950",
+    border: "border-blue-200 dark:border-blue-800",
     dot: "bg-blue-500",
-    text: "text-blue-800",
-    subtext: "text-blue-700",
+    text: "text-blue-800 dark:text-blue-200",
+    subtext: "text-blue-700 dark:text-blue-300",
   },
 };
 
@@ -119,7 +119,7 @@ export function EngagementDashboard({ analysis }: { analysis: EngagementAnalysis
                 <div
                   key={day.dayOfWeek}
                   className={`flex items-center justify-between py-1.5 px-3 rounded-md ${
-                    day.isProblematic ? "bg-red-50" : ""
+                    day.isProblematic ? "bg-red-50 dark:bg-red-950" : ""
                   }`}
                 >
                   <div className="flex items-center gap-2">
