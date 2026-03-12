@@ -59,6 +59,8 @@ export interface Assignment {
   omitFromFinalGrade: boolean;
   assignmentGroupId: string;
   htmlUrl?: string; // link to assignment in LMS
+  submittedAt: string | null;  // ISO timestamp of actual submission
+  secondsLate: number;         // 0 if on-time, positive if late
 }
 
 // === Grade Calculation Results ===
@@ -300,6 +302,53 @@ export interface ConversationItem {
 
 // === Letter Grade Mapping ===
 
+// === Subject Classification ===
+export type SubjectCategory =
+  | "Math" | "English" | "Science" | "Social Studies"
+  | "Languages" | "Arts" | "CS/Tech" | "Electives";
+
+// === Academic Terms ===
+export interface Term {
+  id: string;
+  name: string;
+  startAt: string | null;
+  endAt: string | null;
+}
+
+// === Historical Course (lightweight — no assignment groups) ===
+export interface HistoricalCourse {
+  id: string;
+  name: string;
+  termId: string;
+  termName: string;
+  finalGrade: number | null;
+  letterGrade: string;
+  subjectCategory: SubjectCategory;
+  isActive: boolean;
+  strengthIndex: number;
+}
+
+// === Subject Summary (aggregated across terms) ===
+export interface SubjectSummary {
+  category: SubjectCategory;
+  averageGrade: number;
+  courseCount: number;
+  trend: "improving" | "declining" | "stable";
+  strengthLabel: "strong" | "average" | "weak";
+  grades: { termId: string; termName: string; grade: number; courseName: string }[];
+}
+
+// === Full History Response ===
+export interface AcademicHistoryResponse {
+  studentId: string;
+  studentName: string;
+  terms: Term[];
+  courses: HistoricalCourse[];
+  subjectSummaries: SubjectSummary[];
+  overallTrajectory: "improving" | "declining" | "stable";
+  termGPAs: { termId: string; termName: string; gpa: number }[];
+}
+
 export const LETTER_GRADES: { min: number; letter: string; gpa: number }[] = [
   { min: 93, letter: "A", gpa: 4.0 },
   { min: 90, letter: "A-", gpa: 3.7 },
@@ -314,3 +363,72 @@ export const LETTER_GRADES: { min: number; letter: string; gpa: number }[] = [
   { min: 60, letter: "D-", gpa: 0.7 },
   { min: 0, letter: "F", gpa: 0.0 },
 ];
+
+// === Engagement Detection ===
+
+export interface SubmissionTimingPoint {
+  assignmentId: string;
+  assignmentName: string;
+  courseName: string;
+  courseId: string;
+  dueAt: string;
+  submittedAt: string;
+  hoursBeforeDeadline: number;  // negative = late
+  dayOfWeek: number;            // 0=Sun … 6=Sat
+  weekStart: string;            // ISO date of the Monday of that week
+  score: number | null;
+  scorePercent: number | null;
+}
+
+export interface DayOfWeekCell {
+  dayOfWeek: number;
+  weekStart: string;
+  weekLabel: string;            // "Mar 3"
+  submissions: number;
+  onTimeCount: number;
+  lateCount: number;
+  missedCount: number;
+  level: "green" | "yellow" | "red" | "gray";
+}
+
+export interface DayOfWeekPattern {
+  dayOfWeek: number;
+  dayName: string;              // "Monday"
+  totalDue: number;
+  onTimeCount: number;
+  lateCount: number;
+  missedCount: number;
+  avgHoursBeforeDeadline: number;
+  isProblematic: boolean;
+}
+
+export interface EngagementSignal {
+  type: "timing_drift" | "missing_spike" | "day_pattern" | "quality_drop";
+  severity: "critical" | "warning" | "info";
+  title: string;
+  detail: string;
+  actionable: string;
+}
+
+export interface PeriodComparison {
+  label: string;
+  current: { period: string; avgHoursBeforeDeadline: number; missedCount: number; lateCount: number; avgScorePercent: number | null; totalDue: number };
+  previous: { period: string; avgHoursBeforeDeadline: number; missedCount: number; lateCount: number; avgScorePercent: number | null; totalDue: number };
+  timingDelta: number;
+  missingDelta: number;
+  scoreDelta: number | null;
+}
+
+export interface EngagementAnalysis {
+  studentId: string;
+  studentName: string;
+  engagementScore: number;      // 0–100
+  level: "green" | "yellow" | "red";
+  timingPoints: SubmissionTimingPoint[];
+  heatmapData: DayOfWeekCell[];
+  dayPatterns: DayOfWeekPattern[];
+  signals: EngagementSignal[];
+  wow: PeriodComparison;
+  mom: PeriodComparison;
+  timingTrendSlope: number;     // hours/week drift
+}

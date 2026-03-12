@@ -10,7 +10,11 @@ import type {
   WorkloadPeriod,
   AssignmentSnapshot,
   GradeSnapshot,
+  AcademicHistoryResponse,
+  Course,
+  Assignment,
 } from "./types";
+import { buildAcademicHistory } from "./history-engine";
 
 interface ChildData {
   student: Student;
@@ -955,4 +959,335 @@ export function generateDemoSnapshots(): void {
 
 export function generateDemoChildren(): ChildData[] {
   return [buildSam(), buildAlex(), buildJordan()];
+}
+
+// === Academic History Demo Data ===
+
+const DEMO_TERMS = [
+  { id: "t-fall-2024", name: "Fall 2024", startAt: "2024-08-15", endAt: "2024-12-20" },
+  { id: "t-spring-2025", name: "Spring 2025", startAt: "2025-01-10", endAt: "2025-05-25" },
+  { id: "t-fall-2025", name: "Fall 2025", startAt: "2025-08-15", endAt: "2025-12-20" },
+  { id: "t-spring-2026", name: "Spring 2026", startAt: "2026-01-10", endAt: "2026-05-25" },
+];
+
+function makeHistoryCourses(
+  studentId: string,
+  courseData: { name: string; grades: number[] }[]
+) {
+  return courseData.flatMap((course) =>
+    course.grades.map((grade, i) => ({
+      id: `${studentId}-${course.name.toLowerCase().replace(/\s+/g, "-")}-${i}`,
+      name: course.name,
+      finalScore: grade,
+      currentScore: i === course.grades.length - 1 ? grade : null,
+      isActive: i === course.grades.length - 1,
+      term: DEMO_TERMS[i],
+    }))
+  );
+}
+
+export function buildDemoHistoryData(): AcademicHistoryResponse[] {
+  // Sam: declining in STEM, strong in languages
+  const samCourses = makeHistoryCourses("demo-sam", [
+    { name: "Spanish III", grades: [90, 91, 89, 91] },
+    { name: "Algebra II", grades: [86, 87, 88, 88] },
+    { name: "AP Biology", grades: [78, 75, 77, 76] },
+    { name: "US History", grades: [85, 83, 82, 81] },
+    { name: "English 11", grades: [76, 75, 74, 74] },
+  ]);
+
+  // Alex: improving in science, flat in math
+  const alexCourses = makeHistoryCourses("demo-alex", [
+    { name: "Art Studio", grades: [94, 95, 93, 95] },
+    { name: "Chemistry", grades: [89, 90, 91, 92] },
+    { name: "Geometry", grades: [82, 83, 81, 83] },
+    { name: "World History", grades: [88, 87, 89, 89] },
+  ]);
+
+  // Jordan: strong everywhere, CS standout
+  const jordanCourses = makeHistoryCourses("demo-jordan", [
+    { name: "AP Computer Science", grades: [95, 96, 97, 96] },
+    { name: "Pre-Calculus", grades: [93, 93, 94, 94] },
+    { name: "Physics", grades: [90, 91, 91, 91] },
+    { name: "English 12", grades: [86, 87, 88, 88] },
+    { name: "AP Government", grades: [92, 92, 93, 93] },
+  ]);
+
+  return [
+    buildAcademicHistory("demo-sam", "Sam", samCourses, {}),
+    buildAcademicHistory("demo-alex", "Alex", alexCourses, {}),
+    buildAcademicHistory("demo-jordan", "Jordan", jordanCourses, {}),
+  ];
+}
+
+// === Engagement Demo Data ===
+
+function weeksAgo(weeks: number, dayOfWeek: number, hour: number = 23, minute: number = 59): string {
+  const now = new Date();
+  // Get most recent Monday
+  const day = now.getDay();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - day + (day === 0 ? -6 : 1));
+  monday.setHours(0, 0, 0, 0);
+  // Go back N weeks and add dayOfWeek offset (0=Mon, 1=Tue, ..., 4=Fri)
+  const target = new Date(monday);
+  target.setDate(monday.getDate() - weeks * 7 + dayOfWeek);
+  target.setHours(hour, minute, 0, 0);
+  return target.toISOString();
+}
+
+function hoursBeforeDue(dueAt: string, hours: number): string {
+  return new Date(Date.parse(dueAt) - hours * 3_600_000).toISOString();
+}
+
+function hoursAfterDue(dueAt: string, hours: number): string {
+  return new Date(Date.parse(dueAt) + hours * 3_600_000).toISOString();
+}
+
+function makeEngagementAssignment(
+  id: string,
+  name: string,
+  dueAt: string,
+  pointsPossible: number,
+  opts: {
+    submittedAt?: string | null;
+    score?: number | null;
+    missing?: boolean;
+    late?: boolean;
+    secondsLate?: number;
+  }
+): Assignment {
+  const missing = opts.missing ?? false;
+  const submitted = !!opts.submittedAt;
+  return {
+    id,
+    name,
+    dueAt,
+    pointsPossible,
+    score: opts.score ?? null,
+    submitted,
+    missing,
+    late: opts.late ?? false,
+    excused: false,
+    omitFromFinalGrade: false,
+    assignmentGroupId: "eg-hw",
+    submittedAt: opts.submittedAt ?? null,
+    secondsLate: opts.secondsLate ?? 0,
+  };
+}
+
+function buildEngagementSam(): { studentId: string; studentName: string; courses: Course[] } {
+  const assignments: Assignment[] = [];
+  let idx = 0;
+
+  // 8 weeks of assignments, 5 per week (Mon-Fri)
+  // Weeks 1-3: early submitter, good scores
+  for (let w = 7; w >= 5; w--) {
+    for (let d = 0; d < 5; d++) {
+      const due = weeksAgo(w, d);
+      const earlyHours = 24 + Math.random() * 24; // 24-48h early
+      const score = 78 + Math.random() * 10; // 78-88
+      assignments.push(makeEngagementAssignment(
+        `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+        { submittedAt: hoursBeforeDue(due, earlyHours), score: Math.round(score), late: false }
+      ));
+      idx++;
+    }
+  }
+
+  // Weeks 4-5: submitting closer to deadline, slightly lower scores
+  for (let w = 4; w >= 3; w--) {
+    for (let d = 0; d < 5; d++) {
+      const due = weeksAgo(w, d);
+      const earlyHours = 2 + Math.random() * 4; // 2-6h early
+      const score = 72 + Math.random() * 10; // 72-82
+      assignments.push(makeEngagementAssignment(
+        `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+        { submittedAt: hoursBeforeDue(due, earlyHours), score: Math.round(score), late: false }
+      ));
+      idx++;
+    }
+  }
+
+  // Weeks 6-7: last minute or late, some missing, Mon/Fri worst
+  for (let w = 2; w >= 1; w--) {
+    for (let d = 0; d < 5; d++) {
+      const due = weeksAgo(w, d);
+      // Monday (d=0) and Friday (d=4) are worst
+      if ((d === 0 || d === 4) && Math.random() > 0.4) {
+        // Missing on Mon/Fri
+        assignments.push(makeEngagementAssignment(
+          `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+          { submittedAt: null, missing: true }
+        ));
+      } else {
+        const lateChance = Math.random();
+        if (lateChance > 0.5) {
+          // Late
+          const lateHours = 1 + Math.random() * 8;
+          const score = 65 + Math.random() * 10;
+          assignments.push(makeEngagementAssignment(
+            `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+            { submittedAt: hoursAfterDue(due, lateHours), score: Math.round(score), late: true, secondsLate: Math.round(lateHours * 3600) }
+          ));
+        } else {
+          // Just barely on time
+          const earlyHours = Math.random() * 2;
+          const score = 65 + Math.random() * 10;
+          assignments.push(makeEngagementAssignment(
+            `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+            { submittedAt: hoursBeforeDue(due, earlyHours), score: Math.round(score), late: false }
+          ));
+        }
+      }
+      idx++;
+    }
+  }
+
+  // Week 8 (current): mostly missing, late when submitted
+  for (let d = 0; d < 5; d++) {
+    const due = weeksAgo(0, d);
+    if (Date.parse(due) > Date.now()) break; // Don't include future assignments
+    if (d === 0 || d === 3 || d === 4) {
+      // Missing
+      assignments.push(makeEngagementAssignment(
+        `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+        { submittedAt: null, missing: true }
+      ));
+    } else {
+      // Late
+      const lateHours = 2 + Math.random() * 6;
+      const score = 60 + Math.random() * 10;
+      assignments.push(makeEngagementAssignment(
+        `sam-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+        { submittedAt: hoursAfterDue(due, lateHours), score: Math.round(score), late: true, secondsLate: Math.round(lateHours * 3600) }
+      ));
+    }
+    idx++;
+  }
+
+  return {
+    studentId: "demo-sam",
+    studentName: "Sam",
+    courses: [{
+      id: "sam-eng-course",
+      name: "English",
+      currentScore: 72,
+      finalScore: 68,
+      source: "canvas",
+      assignmentGroups: [{
+        id: "eg-hw",
+        name: "Assignments",
+        weight: 100,
+        rules: { dropLowest: 0, dropHighest: 0, neverDrop: [] },
+        assignments,
+      }],
+    }],
+  };
+}
+
+function buildEngagementAlex(): { studentId: string; studentName: string; courses: Course[] } {
+  const assignments: Assignment[] = [];
+  let idx = 0;
+
+  // 8 weeks, generally on-time but Wed (d=2) and Fri (d=4) consistently late/missing
+  for (let w = 7; w >= 0; w--) {
+    for (let d = 0; d < 5; d++) {
+      const due = weeksAgo(w, d);
+      if (Date.parse(due) > Date.now()) break;
+
+      if (d === 2 || d === 4) {
+        // Wednesday and Friday: late or missing
+        if (Math.random() > 0.6) {
+          // Missing
+          assignments.push(makeEngagementAssignment(
+            `alex-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+            { submittedAt: null, missing: true }
+          ));
+        } else {
+          // Late
+          const lateHours = 2 + Math.random() * 10;
+          const score = 82 + Math.random() * 6;
+          assignments.push(makeEngagementAssignment(
+            `alex-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+            { submittedAt: hoursAfterDue(due, lateHours), score: Math.round(score), late: true, secondsLate: Math.round(lateHours * 3600) }
+          ));
+        }
+      } else {
+        // Mon, Tue, Thu: on-time, good scores
+        const earlyHours = 12 + Math.random() * 12; // 12-24h early
+        const score = 82 + Math.random() * 6; // 82-88, stable
+        assignments.push(makeEngagementAssignment(
+          `alex-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+          { submittedAt: hoursBeforeDue(due, earlyHours), score: Math.round(score), late: false }
+        ));
+      }
+      idx++;
+    }
+  }
+
+  return {
+    studentId: "demo-alex",
+    studentName: "Alex",
+    courses: [{
+      id: "alex-chem-course",
+      name: "Chemistry",
+      currentScore: 85,
+      finalScore: 83,
+      source: "canvas",
+      assignmentGroups: [{
+        id: "eg-hw",
+        name: "Assignments",
+        weight: 100,
+        rules: { dropLowest: 0, dropHighest: 0, neverDrop: [] },
+        assignments,
+      }],
+    }],
+  };
+}
+
+function buildEngagementJordan(): { studentId: string; studentName: string; courses: Course[] } {
+  const assignments: Assignment[] = [];
+  let idx = 0;
+
+  // 8 weeks, consistently early, good scores, slight positive trend
+  for (let w = 7; w >= 0; w--) {
+    for (let d = 0; d < 5; d++) {
+      const due = weeksAgo(w, d);
+      if (Date.parse(due) > Date.now()) break;
+
+      // Gets slightly earlier over time
+      const baseEarly = 24 + (7 - w) * 3; // starts 24h, trends to 45h+
+      const earlyHours = baseEarly + Math.random() * 24;
+      const score = 88 + Math.random() * 8; // 88-96
+      assignments.push(makeEngagementAssignment(
+        `jor-e${idx}`, `Assignment ${idx + 1}`, due, 100,
+        { submittedAt: hoursBeforeDue(due, earlyHours), score: Math.round(score), late: false }
+      ));
+      idx++;
+    }
+  }
+
+  return {
+    studentId: "demo-jordan",
+    studentName: "Jordan",
+    courses: [{
+      id: "jor-precalc-course",
+      name: "Pre-Calc",
+      currentScore: 94,
+      finalScore: 94,
+      source: "canvas",
+      assignmentGroups: [{
+        id: "eg-hw",
+        name: "Assignments",
+        weight: 100,
+        rules: { dropLowest: 0, dropHighest: 0, neverDrop: [] },
+        assignments,
+      }],
+    }],
+  };
+}
+
+export function generateEngagementDemoData(): { studentId: string; studentName: string; courses: Course[] }[] {
+  return [buildEngagementSam(), buildEngagementAlex(), buildEngagementJordan()];
 }

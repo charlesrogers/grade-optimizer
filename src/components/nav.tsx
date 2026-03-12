@@ -1,0 +1,94 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+export function Nav() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [isParent, setIsParent] = useState(false);
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("observees");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setIsParent(Array.isArray(parsed) && parsed.length > 0);
+      }
+    } catch {
+      // no observees
+    }
+  }, []);
+
+  if (pathname === "/") return null;
+
+  const links = isParent
+    ? [
+        { href: "/family", label: "Family" },
+        { href: "/dashboard", label: "By Student" },
+        { href: "/history", label: "History" },
+        { href: "/engagement", label: "Engagement" },
+        { href: "/workload", label: "Coming Up" },
+        { href: "/tonight", label: "Study Plan" },
+      ]
+    : [
+        { href: "/dashboard", label: "Today" },
+        { href: "/history", label: "History" },
+        { href: "/engagement", label: "Engagement" },
+        { href: "/workload", label: "Coming Up" },
+        { href: "/optimizer", label: "All Assignments" },
+        { href: "/tonight", label: "Study Plan" },
+        { href: "/family/demo", label: "Parent View" },
+      ];
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    sessionStorage.removeItem("observees");
+    await fetch("/api/canvas/logout", { method: "POST" });
+    router.push("/");
+  }
+
+  return (
+    <nav className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-lg">
+      <div className="max-w-7xl mx-auto px-6 flex items-center h-14">
+        <Link href={isParent ? "/family" : "/dashboard"} className="flex items-center gap-2 mr-8">
+          <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">G</span>
+          </div>
+          <span className="font-semibold text-[15px] tracking-tight text-foreground">
+            GradeOptimizer
+          </span>
+        </Link>
+        <div className="flex items-center gap-1">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`relative px-3 py-1.5 text-[13px] font-medium rounded-md transition-colors ${
+                pathname === link.href
+                  ? "text-primary bg-primary/8"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <div className="ml-auto flex items-center gap-3">
+          <button
+            onClick={handleLogout}
+            disabled={loggingOut}
+            className="text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent"
+          >
+            {loggingOut ? "Disconnecting..." : "Disconnect"}
+          </button>
+          <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary/80 to-primary flex items-center justify-center">
+            <span className="text-[11px] font-semibold text-white">CR</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
