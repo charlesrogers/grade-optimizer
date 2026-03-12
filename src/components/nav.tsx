@@ -93,14 +93,25 @@ export function Nav() {
         </div>
         <div className="ml-auto flex items-center gap-3">
           <button
+            role="switch"
+            aria-checked={demo}
             onClick={handleDemoToggle}
-            className={`text-[12px] font-medium px-2.5 py-1 rounded-full transition-colors ${
-              demo
-                ? "bg-amber-100 text-amber-800 hover:bg-amber-200"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
-            }`}
+            className="flex items-center gap-2 group"
           >
-            {demo ? "Demo On" : "Demo"}
+            <span className="text-[12px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+              Demo
+            </span>
+            <span
+              className={`relative inline-flex h-[22px] w-[40px] shrink-0 items-center rounded-full transition-colors duration-200 ${
+                demo ? "bg-amber-400" : "bg-gray-200"
+              }`}
+            >
+              <span
+                className={`inline-block h-[18px] w-[18px] rounded-full bg-white shadow-sm transition-transform duration-200 ${
+                  demo ? "translate-x-[20px]" : "translate-x-[2px]"
+                }`}
+              />
+            </span>
           </button>
           <button
             onClick={handleLogout}
