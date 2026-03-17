@@ -1,10 +1,31 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ConnectForm } from "@/components/connect-form";
 import { enableDemoMode } from "@/lib/demo-mode";
+import { Suspense } from "react";
 
-export default function Home() {
+function OAuthErrorBanner() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
+
+  if (!error) return null;
+
+  const messages: Record<string, string> = {
+    oauth_failed: "Canvas login failed. Please try again or use an access token.",
+    oauth_denied: "Canvas authorization was denied. You can still connect with an access token.",
+  };
+
+  return (
+    <div className="w-full max-w-md mb-4">
+      <div className="rounded-lg bg-destructive/8 border border-destructive/20 px-4 py-3 text-[13px] text-destructive">
+        {messages[error] || "Something went wrong. Please try again."}
+      </div>
+    </div>
+  );
+}
+
+function HomeContent() {
   const router = useRouter();
 
   function handleTryDemo() {
@@ -34,6 +55,10 @@ export default function Home() {
         </p>
       </div>
 
+      <Suspense>
+        <OAuthErrorBanner />
+      </Suspense>
+
       <ConnectForm />
 
       <button
@@ -47,5 +72,13 @@ export default function Home() {
         Your data stays in your browser. We never store your credentials or grades on our servers.
       </p>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }

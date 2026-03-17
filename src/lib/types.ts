@@ -3,6 +3,8 @@
 export interface CanvasConfig {
   baseUrl: string; // e.g. "https://district.instructure.com"
   accessToken: string;
+  refreshToken?: string; // present for OAuth logins
+  tokenExpiresAt?: number; // unix ms, present for OAuth logins
 }
 
 export interface SkywardConfig {

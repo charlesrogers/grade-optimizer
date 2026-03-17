@@ -1,7 +1,7 @@
 export const maxDuration = 60;
 
 import { NextRequest, NextResponse } from "next/server";
-import { getLMSConfig } from "@/lib/cookies";
+import { getLMSConfig, getCanvasConfigWithRefresh } from "@/lib/cookies";
 import { fetchCoursesFromConfig } from "@/lib/data-source";
 import { calculateGradeBreakdown } from "@/lib/grade-engine";
 import {
@@ -26,6 +26,9 @@ export async function GET(request: NextRequest) {
       const rawCourses = getDemoRawCoursesForStudent(studentId);
       return NextResponse.json({ ...response, rawCourses });
     }
+
+    // Try refreshing OAuth token if needed before getting config
+    await getCanvasConfigWithRefresh();
 
     const lmsConfig = await getLMSConfig();
     if (!lmsConfig) {

@@ -1,7 +1,7 @@
 export const maxDuration = 60;
 
 import { NextRequest, NextResponse } from "next/server";
-import { getLMSConfig } from "@/lib/cookies";
+import { getLMSConfig, getCanvasConfigWithRefresh } from "@/lib/cookies";
 import { fetchHistoricalFromConfig } from "@/lib/data-source";
 import { buildAcademicHistory } from "@/lib/history-engine";
 import { getDemoHistoryForStudent } from "@/lib/demo-data";
@@ -15,6 +15,8 @@ export async function GET(request: NextRequest) {
       const studentId = searchParams.get("studentId") || "demo-sam";
       return NextResponse.json(getDemoHistoryForStudent(studentId));
     }
+
+    await getCanvasConfigWithRefresh();
 
     const lmsConfig = await getLMSConfig();
     if (!lmsConfig) {
