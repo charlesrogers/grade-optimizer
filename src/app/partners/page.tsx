@@ -167,27 +167,39 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* Why Partnerships */}
+      {/* Who We Partner With */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <div className="text-center mb-10">
           <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <Heart className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-[20px] font-bold text-foreground">
-            Why LMS partnerships matter to us
+            Who we partner with
           </h2>
         </div>
 
         <div className="space-y-6 text-[15px] text-muted-foreground leading-relaxed">
           <p>
-            Jebbix only works if the underlying platform has great data. Assignment groups with weights, submission timestamps with late metadata, observer relationships with linked students &mdash; we need all of it, well-structured and accessible. The better the LMS API, the more value we can deliver to families.
+            We&apos;re selective about partnerships. Jebbix only integrates with platforms that share our values:
           </p>
-          <p>
-            That&apos;s why we want to partner with the platforms that got the hard part right. We&apos;re just the last mile &mdash; turning structured data into a clear answer for families at home.
-          </p>
-          <p>
-            When a parent&apos;s experience improves because their kid focused on the right assignment &mdash; that&apos;s a win for everyone. The family is happier. The student performs better. And the LMS is the platform that made it possible.
-          </p>
+          <ul className="space-y-3 ml-1">
+            <li className="flex gap-3">
+              <span className="text-primary font-bold mt-0.5">&bull;</span>
+              <span><strong className="text-foreground">Open data.</strong> Families should be able to use their own data in the tools that serve them best. Walled gardens don&apos;t help students.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary font-bold mt-0.5">&bull;</span>
+              <span><strong className="text-foreground">Privacy by default.</strong> Student data is sensitive. We partner with platforms that treat it that way &mdash; not as a monetization opportunity.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary font-bold mt-0.5">&bull;</span>
+              <span><strong className="text-foreground">Structured, well-documented APIs.</strong> Assignment weights, submission timestamps, observer relationships &mdash; the data needs to be real, accessible, and reliable.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary font-bold mt-0.5">&bull;</span>
+              <span><strong className="text-foreground">Families matter.</strong> The best platforms know that student success doesn&apos;t stop at the classroom door. When families have clarity, everyone wins.</span>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -250,20 +262,24 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* The Ask */}
+      {/* About */}
       <section className="bg-secondary/50 dark:bg-secondary/20">
         <div className="max-w-3xl mx-auto px-6 py-20 text-center">
           <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
             <GraduationCap className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-[20px] font-bold text-foreground mb-4">
-            We&apos;re looking for the right LMS partner
+            Backed by Imprevista
           </h2>
           <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl mx-auto mb-4">
-            Jebbix is built and ready to integrate. We&apos;re looking for an LMS partner with a strong API, a commitment to open data, and a belief that families deserve better tools at home.
+            Jebbix is built by{" "}
+            <a href="https://imprevista.com" className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors">
+              Imprevista
+            </a>
+            , a product studio that specializes in turning underused data into clear decisions. We build tools across education, wildlife management, e-commerce, and sports analytics &mdash; always with the same approach: find the data nobody&apos;s connecting, and surface what matters.
           </p>
           <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl mx-auto">
-            We&apos;re a small team that cares deeply about building useful things for students and parents. The right partnership means families get clarity &mdash; and the platform gets more engaged, happier users.
+            Jebbix is where that approach meets education. The data is there. Families just need someone to connect it for them.
           </p>
         </div>
       </section>
