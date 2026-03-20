@@ -474,7 +474,7 @@ export default function ThesisPage() {
                 },
                 {
                   tag: "Education",
-                  title: "GradeOptimizer",
+                  title: "Jebbix",
                   desc: "Canvas API data transformed into engagement drift detection. Submission timing patterns and leading indicators surface disengagement before grades drop.",
                   detail: "10x Skill \u2014 leading indicators surface disengagement early",
                   accent: "var(--t-accent)",

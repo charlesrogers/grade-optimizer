@@ -22,13 +22,13 @@ export async function GET(request: NextRequest) {
     // User denied authorization
     if (error) {
       return NextResponse.redirect(
-        `${appUrl}/?error=oauth_denied`
+        `${appUrl}/connect?error=oauth_denied`
       );
     }
 
     if (!code || !state) {
       return NextResponse.redirect(
-        `${appUrl}/?error=oauth_failed`
+        `${appUrl}/connect?error=oauth_failed`
       );
     }
 
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       statePayload = JSON.parse(decoded);
     } catch {
       return NextResponse.redirect(
-        `${appUrl}/?error=oauth_failed`
+        `${appUrl}/connect?error=oauth_failed`
       );
     }
 
@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
 
     if (!storedNonce || storedNonce !== statePayload.nonce) {
       return NextResponse.redirect(
-        `${appUrl}/?error=oauth_failed`
+        `${appUrl}/connect?error=oauth_failed`
       );
     }
 
@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
     const instance = getOAuthInstance(statePayload.baseUrl);
     if (!instance) {
       return NextResponse.redirect(
-        `${appUrl}/?error=oauth_failed`
+        `${appUrl}/connect?error=oauth_failed`
       );
     }
 
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
     const validation = await validateToken(config);
     if (!validation.valid) {
       return NextResponse.redirect(
-        `${appUrl}/?error=oauth_failed`
+        `${appUrl}/connect?error=oauth_failed`
       );
     }
 
@@ -110,7 +110,7 @@ export async function GET(request: NextRequest) {
   } catch (err) {
     console.error("OAuth callback error:", err);
     return NextResponse.redirect(
-      `${appUrl}/?error=oauth_failed`
+      `${appUrl}/connect?error=oauth_failed`
     );
   }
 }

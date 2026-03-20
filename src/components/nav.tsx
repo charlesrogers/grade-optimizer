@@ -33,7 +33,7 @@ export function Nav() {
     }
   }, []);
 
-  if (pathname === "/") return null;
+  if (["/", "/connect", "/parents", "/partners"].includes(pathname)) return null;
 
   const links = isParent
     ? [
@@ -58,13 +58,13 @@ export function Nav() {
     disableDemoMode();
     sessionStorage.removeItem("observees");
     await fetch("/api/canvas/logout", { method: "POST" });
-    router.push("/");
+    router.push("/connect");
   }
 
   function handleDemoToggle() {
     if (demo) {
       disableDemoMode();
-      router.push("/");
+      router.push("/connect");
       router.refresh();
     } else {
       enableDemoMode();
@@ -78,10 +78,10 @@ export function Nav() {
       <div className="max-w-7xl mx-auto px-6 flex items-center h-14">
         <Link href={isParent ? "/family" : "/dashboard"} className="flex items-center gap-2 mr-8">
           <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">G</span>
+            <span className="text-primary-foreground font-bold text-sm">J</span>
           </div>
           <span className="font-semibold text-[15px] tracking-tight text-foreground">
-            GradeOptimizer
+            Jebbix
           </span>
         </Link>
         <div className="flex items-center gap-1">

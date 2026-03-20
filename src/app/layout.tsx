@@ -16,11 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GradeOptimizer",
-  description: "Prioritize your assignments by grade impact",
+  title: "Jebbix",
+  description: "Help students focus on what moves their grade",
   icons: {
     icon: "/favicon.svg",
     apple: "/icon.svg",
+  },
+  openGraph: {
+    title: "Jebbix",
+    description: "Help students focus on what moves their grade",
+    siteName: "Jebbix",
+    url: "https://jebbix.com",
   },
 };
 
