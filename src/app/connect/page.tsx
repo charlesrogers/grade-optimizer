@@ -16,8 +16,8 @@ function OAuthErrorBanner() {
   if (!error) return null;
 
   const messages: Record<string, string> = {
-    oauth_failed: "Canvas login failed. Please try again or use an access token.",
-    oauth_denied: "Canvas authorization was denied. You can still connect with an access token.",
+    oauth_failed: "Login failed. Please try again or use an access token.",
+    oauth_denied: "Authorization was denied. You can still connect with an access token.",
   };
 
   return (
@@ -75,7 +75,7 @@ function ConnectContent() {
       <div className="text-center mb-10 space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/8 text-primary text-[13px] font-medium mb-2">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-          Connected to Canvas LMS
+          Connect your LMS
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent">
           Know what matters most

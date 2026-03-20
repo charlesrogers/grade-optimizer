@@ -33,7 +33,7 @@ export default function ParentsPage() {
           </h1>
 
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Jebbix connects to Canvas and shows you exactly which assignments matter most &mdash; before it&apos;s too late to do anything about it.
+            Jebbix connects to your school&apos;s grading system and shows you exactly which assignments matter most &mdash; before it&apos;s too late to do anything about it.
           </p>
 
           <div className="mt-10">
@@ -41,7 +41,7 @@ export default function ParentsPage() {
               href="/connect"
               className="inline-flex items-center gap-2 px-6 py-3 text-[15px] font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors active:translate-y-px shadow-sm"
             >
-              Connect Your Canvas
+              Get Started
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -104,7 +104,7 @@ export default function ParentsPage() {
             What you get as a parent
           </h2>
           <p className="mt-2 text-[14px] text-muted-foreground max-w-lg mx-auto">
-            One dashboard for all your kids. No more logging in and out of Canvas.
+            One dashboard for all your kids. No more juggling logins.
           </p>
         </div>
 
@@ -204,14 +204,14 @@ export default function ParentsPage() {
               <Eye className="h-5 w-5 text-primary" />
             </div>
             <h3 className="text-[13px] font-semibold text-foreground mb-1">Read-Only</h3>
-            <p className="text-[12px] text-muted-foreground">We never change anything in Canvas. View only.</p>
+            <p className="text-[12px] text-muted-foreground">We never change anything in your school&apos;s system. View only.</p>
           </div>
           <div className="flex flex-col items-center text-center p-5">
             <div className="h-10 w-10 rounded-lg bg-chart-3/10 flex items-center justify-center mb-3">
               <ServerOff className="h-5 w-5 text-chart-3" />
             </div>
             <h3 className="text-[13px] font-semibold text-foreground mb-1">No Passwords</h3>
-            <p className="text-[12px] text-muted-foreground">OAuth2 means your password goes to Canvas, not us.</p>
+            <p className="text-[12px] text-muted-foreground">OAuth2 means your password goes to your school, not us.</p>
           </div>
           <div className="flex flex-col items-center text-center p-5">
             <div className="h-10 w-10 rounded-lg bg-chart-4/10 flex items-center justify-center mb-3">
@@ -230,13 +230,13 @@ export default function ParentsPage() {
             See what your student is up against &mdash; tonight
           </h2>
           <p className="text-[14px] text-muted-foreground mb-8">
-            Connect your Canvas parent account and get clarity in under a minute.
+            Connect your parent account and get clarity in under a minute.
           </p>
           <Link
             href="/connect"
             className="inline-flex items-center gap-2 px-6 py-3 text-[15px] font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors active:translate-y-px shadow-sm"
           >
-            Connect Your Canvas
+            Get Started
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

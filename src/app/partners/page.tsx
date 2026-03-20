@@ -31,15 +31,15 @@ export default function PartnersPage() {
         <div className="max-w-7xl mx-auto px-6 pt-24 pb-20 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/8 text-primary text-[13px] font-medium mb-6">
             <Heart className="h-3.5 w-3.5" />
-            Built on Canvas
+            LMS Integration Partner
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent max-w-4xl mx-auto leading-[1.1]">
-            Canvas already has the data. We help students use it.
+            Your LMS already has the data. We help students use it.
           </h1>
 
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Every school on Canvas has assignment weights, due dates, and submission history sitting right there. Jebbix turns that into one simple answer for every student: <em>what should I work on tonight?</em>
+            Every modern LMS has assignment weights, due dates, and submission history sitting right there. Jebbix turns that into one simple answer for every student: <em>what should I work on tonight?</em>
           </p>
         </div>
       </section>
@@ -53,13 +53,13 @@ export default function PartnersPage() {
 
           <div className="space-y-6 text-[15px] text-muted-foreground leading-relaxed">
             <p>
-              Students open Canvas and see a wall of assignments. Some are worth 5% of their grade. Some are worth 30%. But they all look the same. So students either do whatever&apos;s due next, or get overwhelmed and do nothing.
+              Students open their LMS and see a wall of assignments. Some are worth 5% of their grade. Some are worth 30%. But they all look the same. So students either do whatever&apos;s due next, or get overwhelmed and do nothing.
             </p>
             <p>
               Parents log in and see grades &mdash; but by the time a grade drops, the window to do something about it has already closed. There&apos;s no early warning. No signal that says <em>&ldquo;hey, this one matters &mdash; don&apos;t let it slip.&rdquo;</em>
             </p>
             <p className="text-foreground font-medium">
-              The data to solve this already lives in Canvas. Nobody&apos;s connecting it for families.
+              The data to solve this already lives in the LMS. Nobody&apos;s connecting it for families.
             </p>
           </div>
         </div>
@@ -69,10 +69,10 @@ export default function PartnersPage() {
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="text-center mb-14">
           <h2 className="text-[20px] font-bold text-foreground">
-            What Jebbix gives Canvas families
+            What Jebbix gives families
           </h2>
           <p className="mt-2 text-[14px] text-muted-foreground max-w-lg mx-auto">
-            We take what Canvas already knows and make it actionable.
+            We take what the LMS already knows and make it actionable at home.
           </p>
         </div>
 
@@ -120,10 +120,10 @@ export default function PartnersPage() {
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-14">
             <h2 className="text-[20px] font-bold text-foreground">
-              Where Jebbix fits in the Canvas ecosystem
+              Where Jebbix fits
             </h2>
             <p className="mt-2 text-[14px] text-muted-foreground max-w-xl mx-auto">
-              Canvas gives institutions the tools to teach, assess, and manage. Jebbix picks up where the school day ends.
+              The LMS gives institutions the tools to teach, assess, and manage. Jebbix picks up where the school day ends.
             </p>
           </div>
 
@@ -132,9 +132,9 @@ export default function PartnersPage() {
               <div className="h-10 w-10 rounded-lg bg-chart-2/10 flex items-center justify-center mb-4">
                 <School className="h-5 w-5 text-chart-2" />
               </div>
-              <h3 className="text-[14px] font-semibold text-foreground mb-2">Canvas handles the classroom</h3>
+              <h3 className="text-[14px] font-semibold text-foreground mb-2">The LMS handles the classroom</h3>
               <p className="text-[13px] text-muted-foreground leading-relaxed">
-                Course delivery, grading, rubrics, SpeedGrader, discussions, announcements &mdash; everything teachers and admins need to run instruction. That&apos;s Canvas&apos;s job and it does it better than anyone.
+                Course delivery, grading, rubrics, discussions, announcements &mdash; everything teachers and admins need to run instruction. That&apos;s the platform&apos;s job.
               </p>
             </div>
 
@@ -142,7 +142,7 @@ export default function PartnersPage() {
               <div className="h-10 w-10 rounded-lg bg-chart-3/10 flex items-center justify-center mb-4">
                 <BarChart3 className="h-5 w-5 text-chart-3" />
               </div>
-              <h3 className="text-[14px] font-semibold text-foreground mb-2">Intelligent Insights handles the institution</h3>
+              <h3 className="text-[14px] font-semibold text-foreground mb-2">Analytics tools handle the institution</h3>
               <p className="text-[13px] text-muted-foreground leading-relaxed">
                 District-wide analytics, course effectiveness, standards alignment, admin dashboards &mdash; the bird&apos;s-eye view that helps leadership make decisions. That&apos;s institutional intelligence.
               </p>
@@ -167,26 +167,26 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* Why Canvas */}
+      {/* Why Partnerships */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <div className="text-center mb-10">
           <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <Heart className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-[20px] font-bold text-foreground">
-            Why we built on Canvas
+            Why LMS partnerships matter to us
           </h2>
         </div>
 
         <div className="space-y-6 text-[15px] text-muted-foreground leading-relaxed">
           <p>
-            We looked at every major LMS. Canvas is the only one where the API is good enough &mdash; and open enough &mdash; to build something like this properly. Assignment groups with weights, submission timestamps with late metadata, observer relationships with linked students &mdash; it&apos;s all there, well-documented, and it works.
+            Jebbix only works if the underlying platform has great data. Assignment groups with weights, submission timestamps with late metadata, observer relationships with linked students &mdash; we need all of it, well-structured and accessible. The better the LMS API, the more value we can deliver to families.
           </p>
           <p>
-            Jebbix exists because Canvas got the hard part right: structured, accessible data. We&apos;re just the last mile &mdash; turning that data into a clear answer for families at home.
+            That&apos;s why we want to partner with the platforms that got the hard part right. We&apos;re just the last mile &mdash; turning structured data into a clear answer for families at home.
           </p>
           <p>
-            When a parent&apos;s experience with Canvas improves because their kid focused on the right assignment &mdash; that&apos;s a win for everyone. The family is happier. The student performs better. And Canvas is the platform that made it possible.
+            When a parent&apos;s experience improves because their kid focused on the right assignment &mdash; that&apos;s a win for everyone. The family is happier. The student performs better. And the LMS is the platform that made it possible.
           </p>
         </div>
       </section>
@@ -207,7 +207,7 @@ export default function PartnersPage() {
             <div>
               <h3 className="text-[14px] font-semibold text-foreground mb-1">Read-only. Always.</h3>
               <p className="text-[13px] text-muted-foreground leading-relaxed">
-                We request the minimum Canvas API scopes possible. Jebbix can never modify a grade, change an assignment, or submit on a student&apos;s behalf. We view. That&apos;s it.
+                Jebbix only requests read-only API scopes. We can never modify a grade, change an assignment, or submit on a student&apos;s behalf. We view. That&apos;s it.
               </p>
             </div>
           </div>
@@ -241,9 +241,9 @@ export default function PartnersPage() {
               <Sparkles className="h-5 w-5 text-chart-4" />
             </div>
             <div>
-              <h3 className="text-[14px] font-semibold text-foreground mb-1">Canvas gets better, we get better</h3>
+              <h3 className="text-[14px] font-semibold text-foreground mb-1">Better platform, better Jebbix</h3>
               <p className="text-[13px] text-muted-foreground leading-relaxed">
-                Every Canvas API improvement makes Jebbix more useful. We&apos;re aligned: the better Canvas&apos;s data infrastructure gets, the more value we can surface for students.
+                Every API improvement makes Jebbix more useful. We&apos;re aligned with our LMS partners: the better the data infrastructure, the more value we surface for students.
               </p>
             </div>
           </div>
@@ -257,13 +257,13 @@ export default function PartnersPage() {
             <GraduationCap className="h-6 w-6 text-primary" />
           </div>
           <h2 className="text-[20px] font-bold text-foreground mb-4">
-            We&apos;d love to be part of the Edtech Collective
+            We&apos;re looking for the right LMS partner
           </h2>
           <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl mx-auto mb-4">
-            Jebbix is already live and working with Canvas OAuth2. Students and parents are using it to prioritize their work. We&apos;d love to make it official &mdash; get listed, get reviewed, and grow alongside the Canvas ecosystem.
+            Jebbix is built and ready to integrate. We&apos;re looking for an LMS partner with a strong API, a commitment to open data, and a belief that families deserve better tools at home.
           </p>
           <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl mx-auto">
-            We&apos;re a small team that cares deeply about building useful tools for families. We think Jebbix makes Canvas more valuable. We&apos;d be honored to have Instructure&apos;s support in reaching the families who need it.
+            We&apos;re a small team that cares deeply about building useful things for students and parents. The right partnership means families get clarity &mdash; and the platform gets more engaged, happier users.
           </p>
         </div>
       </section>
@@ -275,7 +275,7 @@ export default function PartnersPage() {
             Let&apos;s talk
           </h2>
           <p className="text-[14px] text-muted-foreground mb-8 max-w-lg mx-auto">
-            We&apos;d love to show you what Jebbix does, walk through our integration, and hear how we can be a better Canvas partner.
+            We&apos;d love to show you what Jebbix does and talk about how we can work together to help families.
           </p>
           <a
             href="mailto:hello@jebbix.com"

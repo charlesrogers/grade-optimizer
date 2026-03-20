@@ -29,7 +29,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 pt-24 pb-20 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/8 text-primary text-[13px] font-medium mb-6">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Works with Canvas LMS
+            Works with your school&apos;s LMS
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent max-w-3xl mx-auto leading-[1.1]">
@@ -37,7 +37,7 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Jebbix connects to Canvas and shows students a prioritized to-do list &mdash; assignments ranked by how much they impact the final grade. Less guessing, more progress.
+            Jebbix connects to your school&apos;s learning management system and shows students a prioritized to-do list &mdash; assignments ranked by how much they impact the final grade. Less guessing, more progress.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -65,7 +65,7 @@ export default function HomePage() {
             Everything students and parents need to stay ahead
           </h2>
           <p className="mt-2 text-[14px] text-muted-foreground max-w-lg mx-auto">
-            Jebbix turns Canvas data into clear priorities so nobody has to guess what matters most.
+            Jebbix turns your LMS data into clear priorities so nobody has to guess what matters most.
           </p>
         </div>
 
@@ -129,10 +129,10 @@ export default function HomePage() {
                 Step 1
               </div>
               <h3 className="text-[15px] font-semibold text-foreground mb-2">
-                Connect Canvas
+                Connect Your LMS
               </h3>
               <p className="text-[13px] text-muted-foreground leading-relaxed">
-                Sign in with your school&apos;s Canvas account. OAuth2 keeps your password private &mdash; Jebbix never sees it.
+                Sign in with your school&apos;s learning platform. OAuth2 keeps your password private &mdash; Jebbix never sees it.
               </p>
             </div>
 
@@ -194,7 +194,7 @@ export default function HomePage() {
               <Eye className="h-5 w-5 text-primary" />
             </div>
             <h3 className="text-[13px] font-semibold text-foreground mb-1">Read-Only Access</h3>
-            <p className="text-[12px] text-muted-foreground">We never modify grades, assignments, or any data in Canvas. View only.</p>
+            <p className="text-[12px] text-muted-foreground">We never modify grades, assignments, or any data in your LMS. View only.</p>
           </div>
 
           <div className="flex flex-col items-center text-center p-5">
@@ -202,7 +202,7 @@ export default function HomePage() {
               <ServerOff className="h-5 w-5 text-chart-3" />
             </div>
             <h3 className="text-[13px] font-semibold text-foreground mb-1">No Credential Storage</h3>
-            <p className="text-[12px] text-muted-foreground">Your Canvas password is never sent to us. OAuth2 handles authentication directly with Canvas.</p>
+            <p className="text-[12px] text-muted-foreground">Your password is never sent to us. OAuth2 handles authentication directly with your school.</p>
           </div>
 
           <div className="flex flex-col items-center text-center p-5">
@@ -222,7 +222,7 @@ export default function HomePage() {
             Ready to help your students prioritize?
           </h2>
           <p className="text-[14px] text-muted-foreground mb-8">
-            Connect your Canvas account and see what matters most &mdash; in under a minute.
+            Connect your school account and see what matters most &mdash; in under a minute.
           </p>
           <Link
             href="/connect"
