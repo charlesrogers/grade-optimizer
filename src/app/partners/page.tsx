@@ -11,6 +11,9 @@ import {
   GraduationCap,
   HandHeart,
   Target,
+  School,
+  BarChart3,
+  Home,
 } from "lucide-react";
 
 export default function PartnersPage() {
@@ -112,29 +115,79 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* Why Canvas */}
+      {/* Where Jebbix lives */}
       <section className="bg-secondary/50 dark:bg-secondary/20">
-        <div className="max-w-3xl mx-auto px-6 py-20">
-          <div className="text-center mb-10">
-            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-              <Heart className="h-6 w-6 text-primary" />
-            </div>
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="text-center mb-14">
             <h2 className="text-[20px] font-bold text-foreground">
-              Why we built on Canvas
+              Where Jebbix fits in the Canvas ecosystem
             </h2>
+            <p className="mt-2 text-[14px] text-muted-foreground max-w-xl mx-auto">
+              Canvas gives institutions the tools to teach, assess, and manage. Jebbix picks up where the school day ends.
+            </p>
           </div>
 
-          <div className="space-y-6 text-[15px] text-muted-foreground leading-relaxed">
-            <p>
-              We looked at every major LMS. Canvas is the only one where the API is good enough &mdash; and open enough &mdash; to build something like this properly. Assignment groups with weights, submission timestamps with late metadata, observer relationships with linked students &mdash; it&apos;s all there, well-documented, and it works.
-            </p>
-            <p>
-              Jebbix exists because Canvas got the hard part right: structured, accessible data. We&apos;re just the last mile &mdash; turning that data into a clear answer for families.
-            </p>
-            <p className="text-foreground font-medium">
-              We don&apos;t compete with Canvas. We make Canvas more valuable to the families who use it every day.
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="rounded-xl border bg-card shadow-sm shadow-black/[0.04] p-6">
+              <div className="h-10 w-10 rounded-lg bg-chart-2/10 flex items-center justify-center mb-4">
+                <School className="h-5 w-5 text-chart-2" />
+              </div>
+              <h3 className="text-[14px] font-semibold text-foreground mb-2">Canvas handles the classroom</h3>
+              <p className="text-[13px] text-muted-foreground leading-relaxed">
+                Course delivery, grading, rubrics, SpeedGrader, discussions, announcements &mdash; everything teachers and admins need to run instruction. That&apos;s Canvas&apos;s job and it does it better than anyone.
+              </p>
+            </div>
+
+            <div className="rounded-xl border bg-card shadow-sm shadow-black/[0.04] p-6">
+              <div className="h-10 w-10 rounded-lg bg-chart-3/10 flex items-center justify-center mb-4">
+                <BarChart3 className="h-5 w-5 text-chart-3" />
+              </div>
+              <h3 className="text-[14px] font-semibold text-foreground mb-2">Intelligent Insights handles the institution</h3>
+              <p className="text-[13px] text-muted-foreground leading-relaxed">
+                District-wide analytics, course effectiveness, standards alignment, admin dashboards &mdash; the bird&apos;s-eye view that helps leadership make decisions. That&apos;s institutional intelligence.
+              </p>
+            </div>
+
+            <div className="rounded-xl border bg-card shadow-sm shadow-black/[0.04] p-6 ring-2 ring-primary/20">
+              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <Home className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-[14px] font-semibold text-foreground mb-2">Jebbix handles the kitchen table</h3>
+              <p className="text-[13px] text-muted-foreground leading-relaxed">
+                It&apos;s 8pm, homework is due, and a student needs to know what to work on first. A parent wants to know if their kid is keeping up. That&apos;s the moment Jebbix serves &mdash; and it&apos;s a moment no one else is in.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10 max-w-2xl mx-auto text-center">
+            <p className="text-[14px] text-muted-foreground leading-relaxed">
+              Jebbix doesn&apos;t touch course management, grading, content delivery, assessments, or institutional analytics. We don&apos;t build tools for teachers or admins. We serve one audience &mdash; families &mdash; in one moment: the nightly decision of what to work on and whether to worry.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Why Canvas */}
+      <section className="max-w-3xl mx-auto px-6 py-20">
+        <div className="text-center mb-10">
+          <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <Heart className="h-6 w-6 text-primary" />
+          </div>
+          <h2 className="text-[20px] font-bold text-foreground">
+            Why we built on Canvas
+          </h2>
+        </div>
+
+        <div className="space-y-6 text-[15px] text-muted-foreground leading-relaxed">
+          <p>
+            We looked at every major LMS. Canvas is the only one where the API is good enough &mdash; and open enough &mdash; to build something like this properly. Assignment groups with weights, submission timestamps with late metadata, observer relationships with linked students &mdash; it&apos;s all there, well-documented, and it works.
+          </p>
+          <p>
+            Jebbix exists because Canvas got the hard part right: structured, accessible data. We&apos;re just the last mile &mdash; turning that data into a clear answer for families at home.
+          </p>
+          <p>
+            When a parent&apos;s experience with Canvas improves because their kid focused on the right assignment &mdash; that&apos;s a win for everyone. The family is happier. The student performs better. And Canvas is the platform that made it possible.
+          </p>
         </div>
       </section>
 
@@ -176,9 +229,9 @@ export default function PartnersPage() {
               <HandHeart className="h-5 w-5 text-chart-3" />
             </div>
             <div>
-              <h3 className="text-[14px] font-semibold text-foreground mb-1">Students and parents first</h3>
+              <h3 className="text-[14px] font-semibold text-foreground mb-1">Families only</h3>
               <p className="text-[13px] text-muted-foreground leading-relaxed">
-                We don&apos;t sell data. We don&apos;t run ads. We don&apos;t upsell districts. Jebbix is a tool for families &mdash; and that&apos;s who we answer to.
+                We don&apos;t sell to districts. We don&apos;t build teacher tools. We don&apos;t do institutional analytics. Jebbix is a family utility &mdash; students and parents, that&apos;s it.
               </p>
             </div>
           </div>
