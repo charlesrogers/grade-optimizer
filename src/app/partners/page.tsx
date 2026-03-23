@@ -318,7 +318,10 @@ export default function PartnersPage() {
             <Link href="/connect" className="hover:text-foreground transition-colors">Sign In</Link>
           </div>
           <p className="text-[11px] text-muted-foreground/60">
-            &copy; 2026 Jebbix
+            &copy; 2026 Jebbix &middot; Built by{" "}
+            <a href="https://imprevista.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              Imprevista
+            </a>
           </p>
         </div>
       </footer>
